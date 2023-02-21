@@ -1,0 +1,12 @@
+Nuxt3
+https://reffect.co.jp/vue/nuxt3
+https://qiita.com/tauemo/items/bd5bc0f91faaf731b975
+Nuxt3のlayouts、pagesについて
+https://qiita.com/MS-0610/items/d58e90c0b520b68bfd57
+ReactとVueの比較
+https://zenn.dev/poteboy/articles/ce47ec05498cfa
+状態管理：Composable
+https://developer.mamezou-tech.com/nuxt/nuxt3-state-management/
+Pinia
+https://www.webdesignleaves.com/pr/plugins/vue-basic-05.html
+http://blog.livedoor.jp/nnmy/archives/55086515.html
