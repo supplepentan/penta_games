@@ -1,5 +1,7 @@
 <script setup>
 const tiles = []; // タイル配列
+const cardStyle =
+  "w-36 h-36 border-4 border-black rounded-lg text-center text-3xl bg-gray-200"; //カードのスタイル
 onMounted(() => {
   let table = document.getElementById("table"); // table要素の参照
 
@@ -10,8 +12,7 @@ onMounted(() => {
       // 各列分ループ
       let td = document.createElement("td"); // td要素の作成
       let index = i * 4 + j;
-      td.className =
-        "w-36 h-36 border-2 rounded-lg text-center text-3xl bg-white"; // class設定
+      td.className = cardStyle; // class設定
       td.index = index; // タイルの並び順
       td.value = index; // 描画されている値
       td.textContent = index == 15 ? "" : index + 1; // 0は空欄に
@@ -80,12 +81,12 @@ function swap(i, j) {
 }
 </script>
 <template>
-  <div>
+  <div class="flex justify-center py-2">
     <table id="table"></table>
   </div>
 </template>
 <style scoped>
 .tile {
-  @apply w-72 h-72 border-2 rounded-lg text-center text-3xl bg-white;
+  @apply w-36 h-36 border-4 border-black rounded-lg text-center text-3xl bg-gray-200;
 }
 </style>

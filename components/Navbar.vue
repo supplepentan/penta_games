@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <a href="/">Home</a>
-    <a href="/fifteenthpuzzle">15puzzle</a>
-    <a href="/about">About</a>
+    <NuxtLink to="/">Home</NuxtLink>
+    <NuxtLink to="/fifteenthpuzzle">15puzzle</NuxtLink>
+    <NuxtLink to="/about">About</NuxtLink>
   </nav>
 </template>
