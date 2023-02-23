@@ -1,9 +1,9 @@
 <script setup>
 useHead({
-  title: "15puzzle",
+  title: "Penta Games",
   meta: [
     { charset: "utf-8" },
-    { name: "description", description: "Penta's Hubs" },
+    { name: "description", description: "Penta Games" },
     { name: "viewport", content: "width=device-width, initial-scale=1" },
   ],
   link: [

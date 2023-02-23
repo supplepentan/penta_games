@@ -35,6 +35,11 @@
           </NuxtLink>
           <NuxtLink
             class="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
+            to="/flipcards"
+            >Flip Cards
+          </NuxtLink>
+          <NuxtLink
+            class="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
             to="/about"
             >About
           </NuxtLink>
