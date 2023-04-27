@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const tiles = []; // タイル配列
 const cardStyle =
   "w-36 h-36 border-4 border-black rounded-lg text-center text-3xl bg-gray-200"; //カードのスタイル
@@ -28,6 +28,7 @@ onMounted(() => {
     click({ target: { index: Math.floor(Math.random() * 16) } });
   }
 });
+
 function init() {
   let table = document.getElementById("table"); // table要素の参照
 
@@ -70,7 +71,7 @@ function click(e) {
 }
 
 // i番目のタイルとj番目のタイルの番号を入れ替え
-function swap(i, j) {
+function swap(i: number, j: number) {
   let tmp = tiles[i].value; // 変更先を一時退避
   let x = tiles[i].value == 15 ? "" : tiles[i].value + 1;
   let y = tiles[j].value == 15 ? "" : tiles[j].value + 1;
@@ -80,11 +81,13 @@ function swap(i, j) {
   tiles[j].value = tmp;
 }
 </script>
+
 <template>
   <div class="flex justify-center py-2">
     <table id="table"></table>
   </div>
 </template>
+
 <style scoped>
 .tile {
   @apply w-36 h-36 border-4 border-black rounded-lg text-center text-3xl bg-gray-200;

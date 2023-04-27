@@ -1,21 +1,8 @@
-<script setup>
-useHead({
-  title: "Flip Cards",
-  meta: [
-    { charset: "utf-8" },
-    { name: "description", description: "Penta Games" },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
-  ],
-  link: [
-    {
-      rel: "icon",
-      sizes: "32x32",
-      type: "image/png",
-      href: "/favicon.ico",
-    },
-  ],
-});
-// 配列シャッフル
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { useHead } from "@vueuse/head";
+
+// カード配列をシャッフルする関数
 Array.prototype.shuffle = function () {
   let i = this.length;
   while (i) {
@@ -27,30 +14,47 @@ Array.prototype.shuffle = function () {
   return this;
 };
 
-let timer = NaN; // クリアまでの時間計測用タイマー
-let flipTimer = NaN; // 裏に戻すためのタイマー
-let score = 0; // スコア
-let prevCard = null; // 1枚目に裏返したカード
-let startTime = null; // ゲーム開始時刻
+let timer: number = NaN; // クリアまでの時間計測用タイマー
+let flipTimer: number = NaN; // 裏に戻すためのタイマー
+let score: number = 0; // スコア
+let prevCard: HTMLTableCellElement | null = null; // 1枚目に裏返したカード
+let startTime: Date | null = null; // ゲーム開始時刻
 
 //css
-const tdCard = "w-36 h-36 border-2 text-center text-2xl";
-const tdCardBack = "w-36 h-36 bg-[url('~/assets/image/flipcards/card.png')]";
-const tdRed = "bg-red-200";
-const tdBlack = "bg-black";
+const tdCard: string = "w-36 h-36 border-2 text-center text-2xl";
+const tdCardBack: string = `w-36 h-36 bg-[url('~/assets/image/flipcards/card.png')]`;
+const tdRed: string = "bg-red-200";
+const tdBlack: string = "bg-black";
+const mark: string[] = ["♥", "♦", "♠", "♧"];
+
 // 初期化関数
 onMounted(() => {
-  let table = document.getElementById("table"); // tableへの参照取得
+  useHead({
+    title: "Flip Cards",
+    meta: [
+      { charset: "utf-8" },
+      { name: "description", content: "Penta Games" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+    ],
+    link: [
+      {
+        rel: "icon",
+        sizes: "32x32",
+        type: "image/png",
+        href: "/favicon.ico",
+      },
+    ],
+  });
 
-  let cards = []; // カード格納用配列
-  let mark = ["♥", "♦", "♠", "♧"];
-  for (let j = 0; j < 4; j++) {
-    for (let i = 0; i < 13; i++) {
-      cards.push(mark[j] + " " + (i + 1));
+  let table = document.getElementById("table") as HTMLTableElement; // tableへの参照取得
+
+  let cards: string[] = []; // カード格納用配列
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 13; j++) {
+      cards.push(mark[i] + " " + (j + 1));
     }
   }
   cards.shuffle(); // カードをシャッフル
-  console.log(cards);
   for (let i = 0; i < 4; i++) {
     let tr = document.createElement("tr"); // 行tr作成
     for (let j = 0; j < 13; j++) {
@@ -70,13 +74,13 @@ onMounted(() => {
 // 経過時間計測用タイマー（１秒毎に実行）
 function tick() {
   let now = new Date();
-  let elapsed = Math.floor((now.getTime() - startTime.getTime()) / 1000);
-  document.getElementById("time").textContent = elapsed; // 経過時刻を表示
+  let elapsed = Math.floor((now.getTime() - startTime!.getTime()) / 1000);
+  document.getElementById("time")!.textContent = elapsed.toString(); // 経過時刻を表示
 }
 
 // カード裏返し
-function flip(e) {
-  let src = e.target; // クリックされた要素
+function flip(e: MouseEvent) {
+  let src = e.target as HTMLTableCellElement; // クリックされた要素
   if (flipTimer || src.textContent != "") {
     return; // 既に２枚反転 or 反転済のカードクリック時は何もしない
   }
@@ -97,7 +101,7 @@ function flip(e) {
   }
 
   // ２枚目 - カード一致判定
-  let n0 = prevCard.number.substring(2);
+  let n0 = prevCard!.number.substring(2);
   let n1 = num.substring(2);
   if (n0 == n1) {
     if (++score == 2 * 13) {
@@ -110,18 +114,19 @@ function flip(e) {
     flipTimer = setTimeout(function () {
       src.className = tdCard + tdCardBack;
       src.textContent = "";
-      prevCard.className = tdCard + tdCardBack;
-      prevCard.textContent = "";
+      prevCard!.className = tdCard + tdCardBack;
+      prevCard!.textContent = "";
       prevCard = null;
       flipTimer = NaN;
     }, 1000);
   }
 }
 </script>
+
 <template>
   <div>
     <table id="table"></table>
-    <h2>経過時間：<span id="time">0</span>秒</h2>
+    <div id="time">0</div>
   </div>
 </template>
 <style scoped>
