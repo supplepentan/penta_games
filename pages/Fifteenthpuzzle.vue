@@ -2,6 +2,8 @@
 const tiles = []; // タイル配列
 const cardStyle =
   "w-36 h-36 border-4 border-black rounded-lg text-center text-3xl bg-gray-200"; //カードのスタイル
+const moveCount = ref(0);
+const isCleared = ref(false);
 onMounted(() => {
   let table = document.getElementById("table"); // table要素の参照
 
@@ -27,10 +29,14 @@ onMounted(() => {
     // 10回、疑似的にランダムにクリックして並べ替え
     click({ target: { index: Math.floor(Math.random() * 16) } });
   }
+  moveCount.value = 0;
+  isCleared.value = false;
 });
 
 function init() {
   let table = document.getElementById("table"); // table要素の参照
+  table.innerHTML = "";
+  tiles.length = 0;
 
   for (let i = 0; i < 4; i++) {
     // 4行分ループ
@@ -54,6 +60,8 @@ function init() {
     // 10回、疑似的にランダムにクリックして並べ替え
     click({ target: { index: Math.floor(Math.random() * 16) } });
   }
+  moveCount.value = 0;
+  isCleared.value = false;
 }
 
 function click(e) {
@@ -79,12 +87,23 @@ function swap(i: number, j: number) {
   tiles[i].value = tiles[j].value;
   tiles[j].textContent = x;
   tiles[j].value = tmp;
+  moveCount.value++;
+  isCleared.value = tiles.every((t, idx) => t.value === idx);
+}
+
+function resetGame() {
+  init();
 }
 </script>
 
 <template>
-  <div class="flex justify-center py-2">
+  <div class="flex flex-col items-center py-2">
+    <p class="mb-2">Moves: {{ moveCount }}</p>
     <table id="table"></table>
+    <p v-if="isCleared" class="mt-2 text-green-600 font-bold">Cleared!</p>
+    <button @click="resetGame" class="mt-2 px-4 py-1 bg-blue-300 rounded">
+      Reset
+    </button>
   </div>
 </template>
 
