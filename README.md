@@ -1,42 +1,44 @@
-# Nuxt 3 Minimal Starter
+# Penta Games
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a web application built with Nuxt.js and Tailwind CSS, featuring a collection of mini-games.
 
-## Setup
+## Games
 
-Make sure to install the dependencies:
+- **15 Puzzle**: A sliding puzzle game.
+- **Flip Cards**: A memory game where you match pairs of cards.
 
-```bash
-# yarn
-yarn install
+## Tech Stack
 
-# npm
-npm install
+- [Nuxt.js](https://nuxt.com/)
+- [Vue.js](https://vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-# pnpm
-pnpm install
-```
+## Project Setup
 
-## Development Server
+1.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Start the development server on http://localhost:3000
+2.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:3000`.
 
-```bash
-npm run dev
-```
+## Build for Production
 
-## Production
-
-Build the application for production:
+To build the application for production, run:
 
 ```bash
 npm run build
 ```
 
-Locally preview production build:
+## Generate Static Site
+
+To generate a static version of the site, run:
 
 ```bash
-npm run preview
+npm run generate
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
